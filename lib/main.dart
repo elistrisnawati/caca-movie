@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:ditonton/injection.dart' as di;
+import 'package:ditonton/presentation/pages/home.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -139,8 +140,8 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: kRichBlack,
           textTheme: kTextTheme,
         ),
-        home: HomeMoviePage(),
-        // home: HomePage(),
+        // home: HomeMoviePage(),
+        home: HomePage(),
         navigatorObservers: [routeObserver],
         onGenerateRoute: (RouteSettings settings) {
           switch (settings.name) {

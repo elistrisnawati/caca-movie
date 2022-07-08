@@ -44,6 +44,9 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
         context.read<MovieDetailRecommendationBloc>().add(
               OnRequestedMovieRecommendation(widget.id),
             );
+        context.read<MovieDetailWatchlistBloc>().add(
+              OnRequestedWatchlistStatus(widget.id),
+            );
       },
     );
   }
@@ -89,15 +92,11 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
               ),
             );
           } else if (state is MovieDetailError) {
-            return Expanded(
-              child: Center(
-                child: Text(state.message),
-              ),
+            return Center(
+              child: Text(state.message),
             );
           } else {
-            return Expanded(
-              child: Container(),
-            );
+            return Container();
           }
         },
       ),
@@ -107,23 +106,11 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
 
 class DetailContent extends StatelessWidget {
   final MovieDetail movie;
-  bool isAddedWatchlist = false;
 
-  DetailContent(this.movie, {Key? key}) : super(key: key);
+  const DetailContent(this.movie, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    context.read<MovieDetailWatchlistBloc>()
-      ..add(
-        OnRequestedWatchlistStatus(movie.id),
-      )
-      ..add(
-        OnRequestedRemoveWatchlist(movie),
-      )
-      ..add(
-        OnRequestedSaveWatchlist(movie),
-      );
-
     final screenWidth = MediaQuery.of(context).size.width;
     return Stack(
       children: [
@@ -162,77 +149,129 @@ class DetailContent extends StatelessWidget {
                               movie.title,
                               style: kHeading5,
                             ),
-                            ElevatedButton(
-                              onPressed: () async {
-                                if (!isAddedWatchlist) {
-                                  // Provider
-                                  // await Provider.of<MovieDetailNotifier>(
-                                  //         context,
-                                  //         listen: false)
-                                  //     .addWatchlist(movie);
 
-                                  // BLOC
-                                  context
-                                      .read<MovieDetailWatchlistBloc>()
-                                      .add(OnRequestedSaveWatchlist(movie));
-                                } else {
-                                  // Provider
-                                  // await Provider.of<MovieDetailNotifier>(
-                                  //         context,
-                                  //         listen: false)
-                                  //     .removeFromWatchlist(movie);
+                            // BLOC
+                            BlocBuilder<MovieDetailWatchlistBloc,
+                                MovieDetailWatchlistState>(
+                              builder: (context, state) {
+                                print("STATE " + state.toString());
 
-                                  // BLOC
-                                  context
-                                      .read<MovieDetailWatchlistBloc>()
-                                      .add(OnRequestedRemoveWatchlist(movie));
-                                }
-
-                                // Provider
-                                // final message =
-                                //     Provider.of<MovieDetailNotifier>(context,
-                                //             listen: false)
-                                //         .watchlistMessage;
-
-                                // BLOC
-                                // final message = context
-                                //     .read<MovieDetailBloc>()
-                                //     .watchlistMessage;
-                                // print("MESSAGE " + message);
-                                final message="OK";
-
-                                if (message ==
-                                        MovieDetailWatchlistBloc
-                                            .watchlistAddSuccessMessage ||
-                                    message ==
-                                        MovieDetailWatchlistBloc
-                                            .watchlistRemoveSuccessMessage) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text(message),
-                                    ),
+                                if (state is MovieDetailWatchlistLoading) {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
                                   );
-                                } else {
-                                  showDialog(
-                                    context: context,
-                                    builder: (context) {
-                                      return AlertDialog(
-                                        content: Text(message),
-                                      );
+                                } else if (state
+                                    is MovieDetailWatchlistHasData) {
+                                  WidgetsBinding.instance.addPostFrameCallback(
+                                    (_) {
+                                      print("addPostFrameCallback");
+                                      final message = state.watchlistMessage;
+                                      print(
+                                          "MESSAGE " + state.watchlistMessage);
+                                      if (message.isNotEmpty) {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          SnackBar(
+                                            content: Text(message),
+                                          ),
+                                        );
+                                      }
+                                      state.watchlistMessage = "";
                                     },
                                   );
+
+                                  final isAddedToWatchlist =
+                                      state.isAddedToWatchlist;
+                                  print("ADDED " +
+                                      state.isAddedToWatchlist.toString());
+
+                                  return ElevatedButton(
+                                    onPressed: () async {
+                                      if (!isAddedToWatchlist) {
+                                        // Provider
+                                        // await Provider.of<MovieDetailNotifier>(
+                                        //         context,
+                                        //         listen: false)
+                                        //     .addWatchlist(movie);
+
+                                        // BLOC
+                                        context
+                                            .read<MovieDetailWatchlistBloc>()
+                                            .add(OnRequestedSaveWatchlist(
+                                                movie));
+                                      } else {
+                                        // Provider
+                                        // await Provider.of<MovieDetailNotifier>(
+                                        //         context,
+                                        //         listen: false)
+                                        //     .removeFromWatchlist(movie);
+
+                                        // BLOC
+                                        context
+                                            .read<MovieDetailWatchlistBloc>()
+                                            .add(OnRequestedRemoveWatchlist(
+                                                movie));
+                                      }
+
+                                      // Provider
+                                      // final message =
+                                      //     Provider.of<MovieDetailNotifier>(context,
+                                      //             listen: false)
+                                      //         .watchlistMessage;
+                                      // BLOC
+                                      // final message = state.watchlistMessage;
+                                      // if(message.isNotEmpty) {
+                                      //   ScaffoldMessenger.of(context)
+                                      //       .showSnackBar(
+                                      //     SnackBar(
+                                      //       content: Text(message),
+                                      //     ),
+                                      //   );
+                                      // }
+                                    },
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        isAddedToWatchlist
+                                            ? const Icon(Icons.check)
+                                            : const Icon(Icons.add),
+                                        const Text('Watchlist'),
+                                      ],
+                                    ),
+                                  );
+                                } else if (state is MovieDetailWatchlistEmpty) {
+                                  return Center(
+                                    child: Text("FAILED"),
+                                  );
+                                } else {
+                                  return Container();
                                 }
+
+                                return Text("OUT");
+                                //
+                                // if (state is PopularMoviesLoading) {
+                                //   return const Center(
+                                //     child: CircularProgressIndicator(),
+                                //   );
+                                // } else if (state is PopularMoviesHasData) {
+                                //   final result = state.result;
+                                //   return ListView.builder(
+                                //     itemBuilder: (context, index) {
+                                //       final movie = result[index];
+                                //       return MovieCard(movie);
+                                //     },
+                                //     itemCount: result.length,
+                                //   );
+                                // } else if (state is PopularMoviesError) {
+                                //   return Center(
+                                //     child: Text(state.message),
+                                //   );
+                                // } else {
+                                //   return Container();
+                                // }
                               },
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  isAddedWatchlist
-                                      ? const Icon(Icons.check)
-                                      : const Icon(Icons.add),
-                                  const Text('Watchlist'),
-                                ],
-                              ),
                             ),
+
                             Text(
                               _showGenres(movie.genres),
                             ),

@@ -22,10 +22,12 @@ class MovieDetailWatchlistError extends MovieDetailWatchlistState {
 }
 
 class MovieDetailWatchlistHasData extends MovieDetailWatchlistState {
-  late bool isAddedToWatchlist = false;
+  bool isAddedToWatchlist = false;
+  String watchlistMessage = "";
 
-  MovieDetailWatchlistHasData(this.isAddedToWatchlist);
+  MovieDetailWatchlistHasData(this.isAddedToWatchlist,
+      {this.watchlistMessage = ""});
 
   @override
-  List<Object> get props => [isAddedToWatchlist];
+  List<Object> get props => [isAddedToWatchlist, watchlistMessage];
 }

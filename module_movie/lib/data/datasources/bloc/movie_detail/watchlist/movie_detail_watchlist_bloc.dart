@@ -29,8 +29,11 @@ class MovieDetailWatchlistBloc
         final movieDetailId = event.movieDetailId;
 
         emit(MovieDetailWatchlistLoading());
+
         final isAddedToWatchlist =
             await _getWatchListStatus.execute(movieDetailId);
+        print("OnRequestedWatchlistStatus LOAD: " + isAddedToWatchlist.toString());
+
         emit(MovieDetailWatchlistHasData(isAddedToWatchlist));
         print("OnRequestedWatchlistStatus DONE");
       },
@@ -42,8 +45,7 @@ class MovieDetailWatchlistBloc
 
         final movieDetail = event.movieDetail;
 
-        emit(MovieDetailWatchlistLoading());
-
+        // emit(MovieDetailWatchlistLoading());
         final result = await _saveWatchlist.execute(movieDetail);
         await result.fold(
           (failure) async {
@@ -51,10 +53,12 @@ class MovieDetailWatchlistBloc
           },
           (successMessage) async {
             watchlistMessage = successMessage;
+            emit(MovieDetailWatchlistHasData(
+              true,
+              watchlistMessage: watchlistMessage,
+            ));
           },
         );
-
-        OnRequestedWatchlistStatus(movieDetail.id);
 
         print("OnRequestedSaveWatchlist DONE");
       },
@@ -66,7 +70,7 @@ class MovieDetailWatchlistBloc
 
         final movieDetail = event.movieDetail;
 
-        emit(MovieDetailWatchlistLoading());
+        // emit(MovieDetailWatchlistLoading());
         final result = await _removeWatchlist.execute(movieDetail);
         await result.fold(
           (failure) async {
@@ -74,10 +78,12 @@ class MovieDetailWatchlistBloc
           },
           (successMessage) async {
             watchlistMessage = successMessage;
+            emit(MovieDetailWatchlistHasData(
+              false,
+              watchlistMessage: watchlistMessage,
+            ));
           },
         );
-
-        OnRequestedWatchlistStatus(movieDetail.id);
 
         print("OnRequestedRemoveWatchlist DONE");
       },
