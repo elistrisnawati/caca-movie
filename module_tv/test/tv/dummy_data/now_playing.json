@@ -1,0 +1,26 @@
+{
+  "dates": {
+    "maximum": "2021-05-23",
+    "minimum": "2021-04-05"
+  },
+  "page": 1,
+  "results": [
+    {
+      "backdrop_path": "/path.jpg",
+      "genre_ids": [1, 2, 3, 4],
+      "id": 1,
+      "overview": "Overview",
+      "popularity": 1.0,
+      "poster_path": "/path.jpg",
+      "vote_average": 1.0,
+      "vote_count": 1,
+      "first_air_date": "firstAirDate",
+      "name": "name",
+      "origin_country": ["originCountry"],
+      "original_language": "originalLanguage",
+      "original_name": "originalName"
+    }
+  ],
+  "total_pages": 47,
+  "total_results": 940
+}

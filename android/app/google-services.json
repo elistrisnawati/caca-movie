@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "173554815473",
+    "project_id": "caca-ditonton",
+    "storage_bucket": "caca-ditonton.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:173554815473:android:ba356ba6e6a1ff5c603450",
+        "android_client_info": {
+          "package_name": "com.dicoding.ditonton"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "173554815473-bao33gk65a1civ92mmpi60m337t7aqrm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAusnoqgmG2DMl8THuL0N7nBWALUNWhjB8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "173554815473-bao33gk65a1civ92mmpi60m337t7aqrm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,12 @@
+0000000000000000000000000000000000000000 5fec1f59f41f8619222a13d3cdebbd6fb57b2a8a Leonardus Gazali <leo@temindo.com> 1656671543 +0700	clone: from https://git.n-tco.com/elis.trisnawati/caca-movie.git
+5fec1f59f41f8619222a13d3cdebbd6fb57b2a8a 26823fc4e94f963c59b0fdd45b5a9051586d39e9 Leonardus Gazali <leo@temindo.com> 1656671569 +0700	commit: init
+26823fc4e94f963c59b0fdd45b5a9051586d39e9 0137ca3b75f077a11c77fd171b7075c0fc702c71 Leonardus Gazali <leo@temindo.com> 1656831840 +0700	commit: fix version
+0137ca3b75f077a11c77fd171b7075c0fc702c71 ef247b111eae303b02747fa64bed05c77c848e58 Leonardus Gazali <leo@temindo.com> 1656832631 +0700	commit: fix all major version
+ef247b111eae303b02747fa64bed05c77c848e58 cb1fbc5aee4d3b99e1aa062f7f83322afe78b0c4 Leonardus Gazali <leo@temindo.com> 1656922630 +0700	commit: fix watchlist and null issue
+cb1fbc5aee4d3b99e1aa062f7f83322afe78b0c4 7ff7c9885fbbaa6d2a20aaffb891d3e392453814 Leonardus Gazali <leo@temindo.com> 1657102631 +0700	commit: add module
+7ff7c9885fbbaa6d2a20aaffb891d3e392453814 c3521eb10935ea9ef7e9aa3623ce3e9933ab2bf8 Leonardus Gazali <leo@temindo.com> 1657108841 +0700	commit: add module tv and movie
+c3521eb10935ea9ef7e9aa3623ce3e9933ab2bf8 8be858f4ededc5fc443e0abe59069060006632cf Leonardus Gazali <leo@temindo.com> 1657109642 +0700	commit: fix modue
+8be858f4ededc5fc443e0abe59069060006632cf 9fa4f8dd8b8f9b8a21e520c820a626b8d8ec1bd3 Leonardus Gazali <leo@temindo.com> 1657109680 +0700	commit: remove injection
+9fa4f8dd8b8f9b8a21e520c820a626b8d8ec1bd3 272359d2c40693c135fa0c428d6741b731068365 Leonardus Gazali <leo@temindo.com> 1657110640 +0700	commit: add home page
+272359d2c40693c135fa0c428d6741b731068365 c2ed1c1d28415e4860b029553552badef1aa9b48 Leonardus Gazali <leo@temindo.com> 1657110884 +0700	commit: add home page
+c2ed1c1d28415e4860b029553552badef1aa9b48 ef4e20905a2a083af78df294741187cbf2ccd341 Leonardus Gazali <leo@temindo.com> 1657125243 +0700	commit: move to github
