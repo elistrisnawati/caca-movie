@@ -2,7 +2,6 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 import 'package:module_movie/domain/entities/movie/movie.dart';
-import 'package:module_movie/domain/entities/movie/movie_detail.dart';
 import 'package:module_movie/domain/usecases/movie/get_movie_recommendations.dart';
 
 part 'movie_detail_recommendation_event.dart';

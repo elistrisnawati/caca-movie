@@ -1,7 +1,5 @@
 import 'dart:convert';
-import 'dart:io';
 
-import 'package:http/http.dart' as http;
 import 'package:http/io_client.dart';
 import 'package:module_generic/common/exception.dart';
 import 'package:module_tv/data/models/tv/tv_detail_model.dart';
@@ -24,24 +22,21 @@ abstract class TvRemoteDataSource {
 
 class TvRemoteDataSourceImpl implements TvRemoteDataSource {
   static const API_KEY = 'api_key=2174d146bb9c0eab47529b2e77d6b526';
-  static const BASE_URL = 'https://api.themoviedb.org/3';
+  static const BASE_URL = 'https://api.thetvdb.org/3';
 
   // final http.Client client;
-  late IOClient client;
+  final IOClient client;
 
   TvRemoteDataSourceImpl({required this.client});
 
-  // final SecurityContext context;
+  // final Future<SecurityContext> context;
   //
-  // TvRemoteDataSourceImpl({required this.context}) {
-  //   HttpClient httpClient = HttpClient(context: context);
-  //   client = IOClient(httpClient);
-  // }
+  // TvRemoteDataSourceImpl({required this.context}) ;
 
   @override
   Future<List<TvModel>> getNowPlayingTvs() async {
     final response =
-        await client.get(Uri.parse('$BASE_URL/tv/airing_today?$API_KEY'));
+        await client.get(Uri.parse('$BASE_URL/tv/now_playing?$API_KEY'));
 
     if (response.statusCode == 200) {
       return TvResponse.fromJson(json.decode(response.body)).tvList;

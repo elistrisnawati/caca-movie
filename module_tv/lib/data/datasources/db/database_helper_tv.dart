@@ -34,24 +34,24 @@ class DatabaseHelperTv {
     await db.execute('''
       CREATE TABLE IF NOT EXISTS $_tblTvWatchlist (
         id INTEGER PRIMARY KEY,
-        name TEXT,
+        title TEXT,
         overview TEXT,
         posterPath TEXT
       );
     ''');
   }
 
-  Future<int> insertTvWatchlist(TvTable movie) async {
+  Future<int> insertTvWatchlist(TvTable tv) async {
     final db = await database;
-    return await db!.insert(_tblTvWatchlist, movie.toJson());
+    return await db!.insert(_tblTvWatchlist, tv.toJson());
   }
 
-  Future<int> removeTvWatchlist(TvTable movie) async {
+  Future<int> removeTvWatchlist(TvTable tv) async {
     final db = await database;
     return await db!.delete(
       _tblTvWatchlist,
       where: 'id = ?',
-      whereArgs: [movie.id],
+      whereArgs: [tv.id],
     );
   }
 

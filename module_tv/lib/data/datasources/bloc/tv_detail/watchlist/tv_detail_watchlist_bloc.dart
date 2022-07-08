@@ -1,41 +1,41 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
-import 'package:module_movie/domain/entities/movie/movie_detail.dart';
-import 'package:module_movie/domain/usecases/movie/get_watchlist_status_movie.dart';
-import 'package:module_movie/domain/usecases/movie/remove_movie_watchlist.dart';
-import 'package:module_movie/domain/usecases/movie/save_movie_watchlist.dart';
+import 'package:module_tv/domain/entities/tv/tv_detail.dart';
+import 'package:module_tv/domain/usecases/tv/get_watchlist_status_tv.dart';
+import 'package:module_tv/domain/usecases/tv/remove_tv_watchlist.dart';
+import 'package:module_tv/domain/usecases/tv/save_tv_watchlist.dart';
 
-part 'movie_detail_watchlist_event.dart';
-part 'movie_detail_watchlist_state.dart';
+part 'tv_detail_watchlist_event.dart';
+part 'tv_detail_watchlist_state.dart';
 
-class MovieDetailWatchlistBloc
-    extends Bloc<MovieDetailWatchlistEvent, MovieDetailWatchlistState> {
+class TvDetailWatchlistBloc
+    extends Bloc<TvDetailWatchlistEvent, TvDetailWatchlistState> {
   static const watchlistAddSuccessMessage = 'Added to Watchlist';
   static const watchlistRemoveSuccessMessage = 'Removed from Watchlist';
 
-  final GetWatchListStatusMovie _getWatchListStatus;
-  final SaveWatchlistMovie _saveWatchlist;
-  final RemoveWatchlistMovie _removeWatchlist;
+  final GetWatchListStatusTv _getWatchListStatus;
+  final SaveWatchlistTv _saveWatchlist;
+  final RemoveWatchlistTv _removeWatchlist;
 
   late String watchlistMessage = "";
 
-  MovieDetailWatchlistBloc(
+  TvDetailWatchlistBloc(
       this._getWatchListStatus, this._saveWatchlist, this._removeWatchlist)
-      : super(MovieDetailWatchlistEmpty()) {
+      : super(TvDetailWatchlistEmpty()) {
     on<OnRequestedWatchlistStatus>(
       (event, emit) async {
         print("OnRequestedWatchlistStatus");
-        final movieDetailId = event.movieDetailId;
+        final tvDetailId = event.tvDetailId;
 
-        emit(MovieDetailWatchlistLoading());
+        emit(TvDetailWatchlistLoading());
 
         final isAddedToWatchlist =
-            await _getWatchListStatus.execute(movieDetailId);
+            await _getWatchListStatus.execute(tvDetailId);
         print("OnRequestedWatchlistStatus LOAD: " +
             isAddedToWatchlist.toString());
 
-        emit(MovieDetailWatchlistHasData(isAddedToWatchlist));
+        emit(TvDetailWatchlistHasData(isAddedToWatchlist));
         print("OnRequestedWatchlistStatus DONE");
       },
     );
@@ -44,17 +44,17 @@ class MovieDetailWatchlistBloc
       (event, emit) async {
         print("OnRequestedSaveWatchlist");
 
-        final movieDetail = event.movieDetail;
+        final tvDetail = event.tvDetail;
 
-        // emit(MovieDetailWatchlistLoading());
-        final result = await _saveWatchlist.execute(movieDetail);
+        // emit(TvDetailWatchlistLoading());
+        final result = await _saveWatchlist.execute(tvDetail);
         await result.fold(
           (failure) async {
             watchlistMessage = failure.message;
           },
           (successMessage) async {
             watchlistMessage = successMessage;
-            emit(MovieDetailWatchlistHasData(
+            emit(TvDetailWatchlistHasData(
               true,
               watchlistMessage: watchlistMessage,
             ));
@@ -69,17 +69,17 @@ class MovieDetailWatchlistBloc
       (event, emit) async {
         print("OnRequestedRemoveWatchlist");
 
-        final movieDetail = event.movieDetail;
+        final tvDetail = event.tvDetail;
 
-        // emit(MovieDetailWatchlistLoading());
-        final result = await _removeWatchlist.execute(movieDetail);
+        // emit(TvDetailWatchlistLoading());
+        final result = await _removeWatchlist.execute(tvDetail);
         await result.fold(
           (failure) async {
             watchlistMessage = failure.message;
           },
           (successMessage) async {
             watchlistMessage = successMessage;
-            emit(MovieDetailWatchlistHasData(
+            emit(TvDetailWatchlistHasData(
               false,
               watchlistMessage: watchlistMessage,
             ));
