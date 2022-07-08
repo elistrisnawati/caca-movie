@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:module_generic/common/constants.dart';
 import 'package:module_generic/presentation/pages/about_page.dart';
-import 'package:module_movie/presentation/bloc/movie_list/popular/movie_list_popular_bloc.dart';
 import 'package:module_movie/domain/entities/movie/movie.dart';
+import 'package:module_movie/presentation/bloc/movie_list/popular/movie_list_popular_bloc.dart';
 import 'package:module_movie/presentation/pages/movie/home_movie_page.dart';
 import 'package:module_movie/presentation/pages/movie/movie_detail_page.dart';
 import 'package:module_movie/presentation/pages/movie/popular_movies_page.dart';
@@ -12,7 +12,6 @@ import 'package:module_movie/presentation/pages/movie/watchlist_movies_page.dart
 import 'package:module_tv/presentation/bloc/tv_list/popular/tv_list_popular_bloc.dart';
 import 'package:module_tv/presentation/pages/tv/home_tv_page.dart';
 import 'package:module_tv/presentation/pages/tv/popular_tvs_page.dart';
-import 'package:module_tv/presentation/pages/tv/search_tv_page.dart';
 import 'package:module_tv/presentation/pages/tv/watchlist_tvs_page.dart';
 
 class HomePage extends StatefulWidget {
