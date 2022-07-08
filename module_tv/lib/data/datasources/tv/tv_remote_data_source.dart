@@ -22,7 +22,7 @@ abstract class TvRemoteDataSource {
 
 class TvRemoteDataSourceImpl implements TvRemoteDataSource {
   static const API_KEY = 'api_key=2174d146bb9c0eab47529b2e77d6b526';
-  static const BASE_URL = 'https://api.thetvdb.org/3';
+  static const BASE_URL = 'https://api.themoviedb.org/3';
 
   // final http.Client client;
   final IOClient client;
@@ -36,7 +36,7 @@ class TvRemoteDataSourceImpl implements TvRemoteDataSource {
   @override
   Future<List<TvModel>> getNowPlayingTvs() async {
     final response =
-        await client.get(Uri.parse('$BASE_URL/tv/now_playing?$API_KEY'));
+        await client.get(Uri.parse('$BASE_URL/tv/airing_today?$API_KEY'));
 
     if (response.statusCode == 200) {
       return TvResponse.fromJson(json.decode(response.body)).tvList;

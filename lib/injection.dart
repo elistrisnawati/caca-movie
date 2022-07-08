@@ -60,7 +60,7 @@ final locator = GetIt.instance;
 
 void init(SecurityContext securityContext) {
   locator.registerLazySingleton(
-        // () => IOClient(HttpClient()),
+    // () => IOClient(HttpClient()),
     () => IOClient(HttpClient(context: securityContext)),
   );
 
@@ -274,55 +274,55 @@ void init(SecurityContext securityContext) {
 
   // bloc
   locator.registerFactory(
-        () => TvListPopularBloc(
+    () => TvListPopularBloc(
       locator(),
     ),
   );
   locator.registerFactory(
-        () => TvListNowPlayingBloc(
+    () => TvListNowPlayingBloc(
       locator(),
     ),
   );
   locator.registerFactory(
-        () => TvListTopRatedBloc(
+    () => TvListTopRatedBloc(
       locator(),
     ),
   );
   locator.registerFactory(
-        () => TvSearchBloc(
+    () => TvSearchBloc(
       locator(),
     ),
   );
   locator.registerFactory(
-        () => NowPlayingTvsBloc(
+    () => NowPlayingTvsBloc(
       locator(),
     ),
   );
   locator.registerFactory(
-        () => TopRatedTvsBloc(
+    () => TopRatedTvsBloc(
       locator(),
     ),
   );
   locator.registerFactory(
-        () => PopularTvsBloc(
+    () => PopularTvsBloc(
       locator(),
     ),
   );
   locator.registerFactory(() => WatchlistTvsBloc(
-    locator(),
-  ));
+        locator(),
+      ));
   locator.registerFactory(
-        () => TvDetailBloc(
+    () => TvDetailBloc(
       locator(),
     ),
   );
   locator.registerFactory(
-        () => TvDetailRecommendationBloc(
+    () => TvDetailRecommendationBloc(
       locator(),
     ),
   );
   locator.registerFactory(
-        () => TvDetailWatchlistBloc(
+    () => TvDetailWatchlistBloc(
       locator(),
       locator(),
       locator(),

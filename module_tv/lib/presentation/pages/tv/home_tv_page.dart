@@ -67,7 +67,7 @@ class _HomeTvPageState extends State<HomeTvPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Now Playing',
+                'Airing Today',
                 style: kHeading6,
               ),
               // Consumer
@@ -97,15 +97,11 @@ class _HomeTvPageState extends State<HomeTvPage> {
                     final result = state.result;
                     return TvList(result);
                   } else if (state is NowPlayingTvsError) {
-                    return Expanded(
-                      child: Center(
-                        child: Text(state.message),
-                      ),
+                    return Center(
+                      child: Text(state.message),
                     );
                   } else {
-                    return Expanded(
-                      child: Container(),
-                    );
+                    return Container();
                   }
                 },
               ),
@@ -144,15 +140,11 @@ class _HomeTvPageState extends State<HomeTvPage> {
                     final result = state.result;
                     return TvList(result);
                   } else if (state is PopularTvsError) {
-                    return Expanded(
-                      child: Center(
-                        child: Text(state.message),
-                      ),
+                    return Center(
+                      child: Text(state.message),
                     );
                   } else {
-                    return Expanded(
-                      child: Container(),
-                    );
+                    return Container();
                   }
                 },
               ),
@@ -191,15 +183,11 @@ class _HomeTvPageState extends State<HomeTvPage> {
                     final result = state.result;
                     return TvList(result);
                   } else if (state is TopRatedTvsError) {
-                    return Expanded(
-                      child: Center(
-                        child: Text(state.message),
-                      ),
+                    return Center(
+                      child: Text(state.message),
                     );
                   } else {
-                    return Expanded(
-                      child: Container(),
-                    );
+                    return Container();
                   }
                 },
               ),
@@ -256,7 +244,7 @@ class TvList extends StatelessWidget {
                 );
               },
               child: ClipRRect(
-                borderRadius: BorderRadius.all(const Radius.circular(16)),
+                borderRadius: const BorderRadius.all(Radius.circular(16)),
                 child: CachedNetworkImage(
                   imageUrl: tv.posterPath?.isEmpty ?? true
                       ? BLANK_POSTER

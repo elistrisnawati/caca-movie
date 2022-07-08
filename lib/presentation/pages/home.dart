@@ -14,7 +14,6 @@ import 'package:module_tv/presentation/pages/tv/home_tv_page.dart';
 import 'package:module_tv/presentation/pages/tv/popular_tvs_page.dart';
 import 'package:module_tv/presentation/pages/tv/search_tv_page.dart';
 import 'package:module_tv/presentation/pages/tv/watchlist_tvs_page.dart';
-import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   static const ROUTE_NAME = '/home';
@@ -106,14 +105,6 @@ class _HomePageState extends State<HomePage> {
       ),
       appBar: AppBar(
         title: Text('Ditonton'),
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.pushNamed(context, SearchTvPage.routeName);
-            },
-            icon: Icon(Icons.search),
-          )
-        ],
       ),
       body: SingleChildScrollView(
         child: Column(

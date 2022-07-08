@@ -97,15 +97,11 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
                     final result = state.result;
                     return MovieList(result);
                   } else if (state is NowPlayingMoviesError) {
-                    return Expanded(
-                      child: Center(
-                        child: Text(state.message),
-                      ),
+                    return Center(
+                      child: Text(state.message),
                     );
                   } else {
-                    return Expanded(
-                      child: Container(),
-                    );
+                    return Container();
                   }
                 },
               ),
@@ -144,15 +140,11 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
                     final result = state.result;
                     return MovieList(result);
                   } else if (state is PopularMoviesError) {
-                    return Expanded(
-                      child: Center(
-                        child: Text(state.message),
-                      ),
+                    return Center(
+                      child: Text(state.message),
                     );
                   } else {
-                    return Expanded(
-                      child: Container(),
-                    );
+                    return Container();
                   }
                 },
               ),
@@ -191,15 +183,11 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
                     final result = state.result;
                     return MovieList(result);
                   } else if (state is TopRatedMoviesError) {
-                    return Expanded(
-                      child: Center(
-                        child: Text(state.message),
-                      ),
+                    return Center(
+                      child: Text(state.message),
                     );
                   } else {
-                    return Expanded(
-                      child: Container(),
-                    );
+                    return Container();
                   }
                 },
               ),
@@ -256,7 +244,7 @@ class MovieList extends StatelessWidget {
                 );
               },
               child: ClipRRect(
-                borderRadius: BorderRadius.all(const Radius.circular(16)),
+                borderRadius: const BorderRadius.all(Radius.circular(16)),
                 child: CachedNetworkImage(
                   imageUrl: movie.posterPath?.isEmpty ?? true
                       ? BLANK_POSTER
