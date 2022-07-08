@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:module_movie/data/datasources/bloc/popular/movie_popular_bloc.dart';
+import 'package:module_movie/presentation/bloc/popular/movie_popular_bloc.dart';
 import 'package:module_movie/presentation/widgets/movie/movie_card_list.dart';
 
 class PopularMoviesPage extends StatefulWidget {

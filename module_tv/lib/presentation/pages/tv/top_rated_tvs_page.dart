@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:module_tv/data/datasources/bloc/top_rated/tv_top_rated_bloc.dart';
+import 'package:module_tv/presentation/bloc/top_rated/tv_top_rated_bloc.dart';
 import 'package:module_tv/presentation/widgets/tv/tv_card_list.dart';
 
 class TopRatedTvsPage extends StatefulWidget {

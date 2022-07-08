@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:module_tv/data/datasources/bloc/popular/tv_popular_bloc.dart';
+import 'package:module_tv/presentation/bloc/popular/tv_popular_bloc.dart';
 import 'package:module_tv/presentation/widgets/tv/tv_card_list.dart';
 
 class PopularTvsPage extends StatefulWidget {

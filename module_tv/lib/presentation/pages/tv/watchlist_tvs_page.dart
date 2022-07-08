@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:module_tv/data/datasources/bloc/watchlist/tv_watchlist_bloc.dart';
+import 'package:module_tv/presentation/bloc/watchlist/tv_watchlist_bloc.dart';
 import 'package:module_tv/presentation/widgets/tv/tv_card_list.dart';
 
 class WatchlistTvsPage extends StatefulWidget {

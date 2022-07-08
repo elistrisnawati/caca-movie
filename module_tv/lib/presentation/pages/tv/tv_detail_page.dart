@@ -4,9 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:module_generic/common/constants.dart';
 import 'package:module_generic/domain/entities/genre.dart';
-import 'package:module_tv/data/datasources/bloc/tv_detail/recommendation/tv_detail_recommendation_bloc.dart';
-import 'package:module_tv/data/datasources/bloc/tv_detail/tv_detail_bloc.dart';
-import 'package:module_tv/data/datasources/bloc/tv_detail/watchlist/tv_detail_watchlist_bloc.dart';
+import 'package:module_tv/presentation/bloc/tv_detail/recommendation/tv_detail_recommendation_bloc.dart';
+import 'package:module_tv/presentation/bloc/tv_detail/tv_detail_bloc.dart';
+import 'package:module_tv/presentation/bloc/tv_detail/watchlist/tv_detail_watchlist_bloc.dart';
 import 'package:module_tv/domain/entities/tv/tv.dart';
 import 'package:module_tv/domain/entities/tv/tv_detail.dart';
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:module_movie/data/datasources/bloc/watchlist/movie_watchlist_bloc.dart';
+import 'package:module_movie/presentation/bloc/watchlist/movie_watchlist_bloc.dart';
 import 'package:module_movie/presentation/widgets/movie/movie_card_list.dart';
 
 class WatchlistMoviesPage extends StatefulWidget {
