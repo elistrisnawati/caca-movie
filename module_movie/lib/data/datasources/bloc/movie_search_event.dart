@@ -1,14 +1,14 @@
-part of 'search_bloc.dart';
+part of 'movie_search_bloc.dart';
 
 @immutable
-abstract class SearchEvent extends Equatable {
-  const SearchEvent();
+abstract class MovieSearchEvent extends Equatable {
+  const MovieSearchEvent();
 
   @override
   List<Object> get props => [];
 }
 
-class OnQueryChanged extends SearchEvent {
+class OnQueryChanged extends MovieSearchEvent {
   final String query;
 
   const OnQueryChanged(this.query);

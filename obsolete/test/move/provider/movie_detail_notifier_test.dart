@@ -103,7 +103,7 @@ void main() {
       await provider.fetchMovieDetail(tId);
       // assert
       expect(provider.movieState, RequestState.Loaded);
-      expect(provider.movie, testMovieDetail);
+      expect(provider.movieDetail, testMovieDetail);
       expect(listenerCallCount, 3);
     });
 

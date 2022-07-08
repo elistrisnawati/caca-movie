@@ -5,7 +5,6 @@ import 'package:mockito/mockito.dart';
 import 'package:module_generic/common/state_enum.dart';
 import 'package:module_movie/domain/entities/movie/movie.dart';
 import 'package:module_movie/presentation/pages/movie/movie_detail_page.dart';
-import 'package:module_movie/presentation/provider/movie/movie_detail_notifier.dart';
 import 'package:provider/provider.dart';
 
 import '../../dummy_data/dummy_objects.dart';

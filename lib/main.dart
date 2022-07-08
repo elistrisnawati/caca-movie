@@ -6,21 +6,21 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:module_generic/common/constants.dart';
 import 'package:module_generic/common/utils.dart';
 import 'package:module_generic/presentation/pages/about_page.dart';
+import 'package:module_movie/data/datasources/bloc/movie_list_bloc.dart';
+import 'package:module_movie/data/datasources/bloc/movie_popular_bloc.dart';
+import 'package:module_movie/data/datasources/bloc/movie_search_bloc.dart';
+import 'package:module_movie/data/datasources/bloc/movie_top_rated_bloc.dart';
+import 'package:module_movie/data/datasources/bloc/movie_watchlist_bloc.dart';
 import 'package:module_movie/presentation/pages/movie/home_movie_page.dart';
 import 'package:module_movie/presentation/pages/movie/movie_detail_page.dart';
 import 'package:module_movie/presentation/pages/movie/popular_movies_page.dart';
 import 'package:module_movie/presentation/pages/movie/search_movie_page.dart';
 import 'package:module_movie/presentation/pages/movie/top_rated_movies_page.dart';
 import 'package:module_movie/presentation/pages/movie/watchlist_movies_page.dart';
-import 'package:module_movie/presentation/provider/movie/movie_detail_notifier.dart';
-import 'package:module_movie/presentation/provider/movie/movie_list_notifier.dart';
-import 'package:module_movie/presentation/provider/movie/movie_search_notifier.dart';
-import 'package:module_movie/presentation/provider/movie/popular_movies_notifier.dart';
-import 'package:module_movie/presentation/provider/movie/top_rated_movies_notifier.dart';
-import 'package:module_movie/presentation/provider/movie/watchlist_movie_notifier.dart';
 import 'package:module_tv/presentation/pages/tv/home_tv_page.dart';
 import 'package:module_tv/presentation/pages/tv/popular_tvs_page.dart';
 import 'package:module_tv/presentation/pages/tv/search_tv_page.dart';
@@ -41,7 +41,8 @@ void main() async {
 
   print("globalContext");
 
-  final sslCert = await rootBundle.load('assets/certificates/themoviedb-org.pem');
+  final sslCert =
+      await rootBundle.load('assets/certificates/themoviedb-org.pem');
   SecurityContext securityContext = SecurityContext(withTrustedRoots: false);
   securityContext.setTrustedCertificatesBytes(sslCert.buffer.asInt8List());
   di.init(securityContext);
@@ -55,23 +56,40 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         // for movie
-        ChangeNotifierProvider(
-          create: (_) => di.locator<MovieListNotifier>(),
+        // ChangeNotifierProvider(
+        //   create: (_) => di.locator<MovieListNotifier>(),
+        // ),
+        // ChangeNotifierProvider(
+        //   create: (_) => di.locator<MovieDetailNotifier>(),
+        // ),
+        // ChangeNotifierProvider(
+        //   create: (_) => di.locator<MovieSearchNotifier>(),
+        // ),
+        // ChangeNotifierProvider(
+        //   create: (_) => di.locator<TopRatedMoviesNotifier>(),
+        // ),
+        // ChangeNotifierProvider(
+        //   create: (_) => di.locator<PopularMoviesNotifier>(),
+        // ),
+        // ChangeNotifierProvider(
+        //   create: (_) => di.locator<WatchlistMovieNotifier>(),
+        // ),
+
+        // MovieList BLOC
+        BlocProvider(
+          create: (_) => di.locator<MovieSearchBloc>(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<MovieDetailNotifier>(),
+        BlocProvider(
+          create: (_) => di.locator<MovieListBloc>(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<MovieSearchNotifier>(),
+        BlocProvider(
+          create: (_) => di.locator<PopularMoviesBloc>(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<TopRatedMoviesNotifier>(),
+        BlocProvider(
+          create: (_) => di.locator<TopRatedMoviesBloc>(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<PopularMoviesNotifier>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<WatchlistMovieNotifier>(),
+        BlocProvider(
+          create: (_) => di.locator<WatchlistMoviesBloc>(),
         ),
 
         // for tv series
@@ -108,21 +126,21 @@ class MyApp extends StatelessWidget {
         onGenerateRoute: (RouteSettings settings) {
           switch (settings.name) {
             // movie
-            case HomeMoviePage.ROUTE_NAME:
+            case HomeMoviePage.routeName:
               return MaterialPageRoute(builder: (_) => HomeMoviePage());
-            case PopularMoviesPage.ROUTE_NAME:
+            case PopularMoviesPage.routeName:
               return CupertinoPageRoute(builder: (_) => PopularMoviesPage());
-            case TopRatedMoviesPage.ROUTE_NAME:
+            case TopRatedMoviesPage.routeName:
               return CupertinoPageRoute(builder: (_) => TopRatedMoviesPage());
-            case MovieDetailPage.ROUTE_NAME:
+            case MovieDetailPage.routeName:
               final id = settings.arguments as int;
               return MaterialPageRoute(
                 builder: (_) => MovieDetailPage(id: id),
                 settings: settings,
               );
-            case SearchMoviePage.ROUTE_NAME:
+            case SearchMoviePage.routeName:
               return CupertinoPageRoute(builder: (_) => SearchMoviePage());
-            case WatchlistMoviesPage.ROUTE_NAME:
+            case WatchlistMoviesPage.routeName:
               return MaterialPageRoute(builder: (_) => WatchlistMoviesPage());
 
             // tv

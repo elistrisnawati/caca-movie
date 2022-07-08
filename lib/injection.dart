@@ -1,8 +1,11 @@
-import 'package:flutter/services.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/io_client.dart';
 import 'dart:io';
-import 'package:http/http.dart' as http;
+import 'package:module_movie/data/datasources/bloc/movie_list_bloc.dart';
+import 'package:module_movie/data/datasources/bloc/movie_now_playing_bloc.dart';
+import 'package:module_movie/data/datasources/bloc/movie_search_bloc.dart';
+import 'package:module_movie/data/datasources/bloc/movie_top_rated_bloc.dart';
+import 'package:module_movie/data/datasources/bloc/movie_watchlist_bloc.dart';
 import 'package:module_movie/data/datasources/db/database_helper_movie.dart';
 import 'package:module_movie/data/datasources/movie/movie_local_data_source.dart';
 import 'package:module_movie/data/datasources/movie/movie_remote_data_source.dart';
@@ -18,12 +21,6 @@ import 'package:module_movie/domain/usecases/movie/get_watchlist_status_movie.da
 import 'package:module_movie/domain/usecases/movie/remove_movie_watchlist.dart';
 import 'package:module_movie/domain/usecases/movie/save_movie_watchlist.dart';
 import 'package:module_movie/domain/usecases/movie/search_movies.dart';
-import 'package:module_movie/presentation/provider/movie/movie_detail_notifier.dart';
-import 'package:module_movie/presentation/provider/movie/movie_list_notifier.dart';
-import 'package:module_movie/presentation/provider/movie/movie_search_notifier.dart';
-import 'package:module_movie/presentation/provider/movie/popular_movies_notifier.dart';
-import 'package:module_movie/presentation/provider/movie/top_rated_movies_notifier.dart';
-import 'package:module_movie/presentation/provider/movie/watchlist_movie_notifier.dart';
 import 'package:module_tv/data/datasources/db/database_helper_tv.dart';
 import 'package:module_tv/data/datasources/tv/tv_local_data_source.dart';
 import 'package:module_tv/data/datasources/tv/tv_remote_data_source.dart';
@@ -50,7 +47,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 final locator = GetIt.instance;
 
 void init(SecurityContext securityContext) {
-
   locator.registerLazySingleton(
     () => IOClient(HttpClient(context: securityContext)),
   );
@@ -60,43 +56,43 @@ void init(SecurityContext securityContext) {
   );
 
   // movie provider
-  locator.registerFactory(
-    () => MovieListNotifier(
-      getNowPlayingMovies: locator(),
-      getPopularMovies: locator(),
-      getTopRatedMovies: locator(),
-    ),
-  );
-
-  locator.registerFactory(
-    () => MovieDetailNotifier(
-      getMovieDetail: locator(),
-      getMovieRecommendations: locator(),
-      getWatchListStatus: locator(),
-      saveWatchlist: locator(),
-      removeWatchlist: locator(),
-    ),
-  );
-  locator.registerFactory(
-    () => MovieSearchNotifier(
-      searchMovies: locator(),
-    ),
-  );
-  locator.registerFactory(
-    () => PopularMoviesNotifier(
-      locator(),
-    ),
-  );
-  locator.registerFactory(
-    () => TopRatedMoviesNotifier(
-      getTopRatedMovies: locator(),
-    ),
-  );
-  locator.registerFactory(
-    () => WatchlistMovieNotifier(
-      getWatchlistMovies: locator(),
-    ),
-  );
+  // locator.registerFactory(
+  //   () => MovieListNotifier(
+  //     getNowPlayingMovies: locator(),
+  //     getPopularMovies: locator(),
+  //     getTopRatedMovies: locator(),
+  //   ),
+  // );
+  //
+  // locator.registerFactory(
+  //   () => MovieDetailNotifier(
+  //     getMovieDetail: locator(),
+  //     getMovieRecommendations: locator(),
+  //     getWatchListStatus: locator(),
+  //     saveWatchlist: locator(),
+  //     removeWatchlist: locator(),
+  //   ),
+  // );
+  // locator.registerFactory(
+  //   () => MovieSearchNotifier(
+  //     searchMovies: locator(),
+  //   ),
+  // );
+  // locator.registerFactory(
+  //   () => PopularMoviesNotifier(
+  //     locator(),
+  //   ),
+  // );
+  // locator.registerFactory(
+  //   () => TopRatedMoviesNotifier(
+  //     getTopRatedMovies: locator(),
+  //   ),
+  // );
+  // locator.registerFactory(
+  //   () => WatchlistMovieNotifier(
+  //     getWatchlistMovies: locator(),
+  //   ),
+  // );
 
   // movie use case
   locator.registerLazySingleton(() => GetNowPlayingMovies(locator()));
@@ -205,4 +201,33 @@ void init(SecurityContext securityContext) {
 
   // helper
   locator.registerLazySingleton<DatabaseHelperTv>(() => DatabaseHelperTv());
+
+  // bloc
+  locator.registerFactory(
+    () => MovieSearchBloc(
+      locator(),
+    ),
+  );
+  locator.registerFactory(
+    () => MovieListBloc(
+      locator(),
+      locator(),
+      locator(),
+    ),
+  );
+  locator.registerFactory(
+    () => NowPlayingMoviesBloc(
+      locator(),
+    ),
+  );
+  locator.registerFactory(
+    () => TopRatedMoviesBloc(
+      locator(),
+    ),
+  );
+  locator.registerFactory(
+    () => WatchlistMoviesBloc(
+      locator(),
+    ),
+  );
 }

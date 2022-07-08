@@ -4,26 +4,26 @@ import 'package:meta/meta.dart';
 import 'package:module_movie/domain/entities/movie/movie.dart';
 import 'package:module_movie/domain/usecases/movie/search_movies.dart';
 
-part 'search_event.dart';
-part 'search_state.dart';
+part 'movie_search_event.dart';
+part 'movie_search_state.dart';
 
-class SearchBloc extends Bloc<SearchEvent, SearchState> {
+class MovieSearchBloc extends Bloc<MovieSearchEvent, MovieSearchState> {
   final SearchMovies _searchMovies;
 
-  SearchBloc(this._searchMovies) : super(SearchEmpty()) {
+  MovieSearchBloc(this._searchMovies) : super(MovieSearchEmpty()) {
     on<OnQueryChanged>(
       (event, emit) async {
         final query = event.query;
 
-        emit(SearchLoading());
+        emit(MovieSearchLoading());
         final result = await _searchMovies.execute(query);
 
         result.fold(
           (failure) {
-            emit(SearchError(failure.message));
+            emit(MovieSearchError(failure.message));
           },
           (data) {
-            emit(SearchHasData(data));
+            emit(MovieSearchHasData(data));
           },
         );
       },

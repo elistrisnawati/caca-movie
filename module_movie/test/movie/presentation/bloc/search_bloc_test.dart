@@ -4,11 +4,11 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:module_generic/common/failure.dart';
-import 'package:module_movie/data/datasources/bloc/search_bloc.dart';
+import 'package:module_movie/data/datasources/bloc/movie_search_bloc.dart';
 import 'package:module_movie/domain/entities/movie/movie.dart';
 import 'package:module_movie/domain/usecases/movie/search_movies.dart';
 
-import '../provider/movie_search_notifier_test.mocks.dart';
+import 'search_bloc_test.mocks.dart';
 
 @GenerateMocks([SearchMovies])
 void main() {
@@ -31,21 +31,21 @@ void main() {
   final tMovieList = <Movie>[tMovieModel];
   const tQuery = 'spiderman';
 
-  late SearchBloc searchBloc;
+  late MovieSearchBloc searchBloc;
   late MockSearchMovies mockSearchMovies;
 
   setUp(
     () {
       mockSearchMovies = MockSearchMovies();
-      searchBloc = SearchBloc(mockSearchMovies);
+      searchBloc = MovieSearchBloc(mockSearchMovies);
     },
   );
 
   test('initial state should be empty', () {
-    expect(searchBloc.state, SearchEmpty());
+    expect(searchBloc.state, MovieSearchEmpty());
   });
 
-  blocTest<SearchBloc, SearchState>(
+  blocTest<MovieSearchBloc, MovieSearchState>(
     'Should emit [Loading, HasData] when data is gotten successfully',
     build: () {
       when(mockSearchMovies.execute(tQuery))
@@ -55,15 +55,15 @@ void main() {
     act: (bloc) => bloc.add(const OnQueryChanged(tQuery)),
     wait: const Duration(milliseconds: 100),
     expect: () => [
-      SearchLoading(),
-      SearchHasData(tMovieList),
+      MovieSearchLoading(),
+      MovieSearchHasData(tMovieList),
     ],
     verify: (bloc) {
       verify(mockSearchMovies.execute(tQuery));
     },
   );
 
-  blocTest<SearchBloc, SearchState>(
+  blocTest<MovieSearchBloc, MovieSearchState>(
     'Should emit [Loading, Error] when get search is unsuccessful',
     build: () {
       when(mockSearchMovies.execute(tQuery))
@@ -72,8 +72,8 @@ void main() {
     },
     act: (bloc) => bloc.add(const OnQueryChanged(tQuery)),
     expect: () => [
-      SearchLoading(),
-      const SearchError('Server Failure'),
+      MovieSearchLoading(),
+      const MovieSearchError('Server Failure'),
     ],
     verify: (bloc) {
       verify(mockSearchMovies.execute(tQuery));
