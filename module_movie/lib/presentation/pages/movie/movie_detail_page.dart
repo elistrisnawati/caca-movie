@@ -195,9 +195,11 @@ class DetailContent extends StatelessWidget {
                                 //         .watchlistMessage;
 
                                 // BLOC
-                                final message = context
-                                    .read<MovieDetailBloc>()
-                                    .watchlistMessage;
+                                // final message = context
+                                //     .read<MovieDetailBloc>()
+                                //     .watchlistMessage;
+                                // print("MESSAGE " + message);
+                                final message="OK";
 
                                 if (message ==
                                         MovieDetailWatchlistBloc

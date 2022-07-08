@@ -1,8 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
-import 'package:module_movie/data/datasources/bloc/movie_detail/movie_detail_bloc.dart';
-import 'package:module_movie/domain/entities/movie/movie.dart';
 import 'package:module_movie/domain/entities/movie/movie_detail.dart';
 import 'package:module_movie/domain/usecases/movie/get_watchlist_status_movie.dart';
 import 'package:module_movie/domain/usecases/movie/remove_movie_watchlist.dart';
@@ -27,17 +25,21 @@ class MovieDetailWatchlistBloc
       : super(MovieDetailWatchlistEmpty()) {
     on<OnRequestedWatchlistStatus>(
       (event, emit) async {
+        print("OnRequestedWatchlistStatus");
         final movieDetailId = event.movieDetailId;
 
         emit(MovieDetailWatchlistLoading());
         final isAddedToWatchlist =
             await _getWatchListStatus.execute(movieDetailId);
         emit(MovieDetailWatchlistHasData(isAddedToWatchlist));
+        print("OnRequestedWatchlistStatus DONE");
       },
     );
 
     on<OnRequestedSaveWatchlist>(
       (event, emit) async {
+        print("OnRequestedSaveWatchlist");
+
         final movieDetail = event.movieDetail;
 
         emit(MovieDetailWatchlistLoading());
@@ -53,11 +55,15 @@ class MovieDetailWatchlistBloc
         );
 
         OnRequestedWatchlistStatus(movieDetail.id);
+
+        print("OnRequestedSaveWatchlist DONE");
       },
     );
 
     on<OnRequestedRemoveWatchlist>(
       (event, emit) async {
+        print("OnRequestedRemoveWatchlist");
+
         final movieDetail = event.movieDetail;
 
         emit(MovieDetailWatchlistLoading());
@@ -72,6 +78,8 @@ class MovieDetailWatchlistBloc
         );
 
         OnRequestedWatchlistStatus(movieDetail.id);
+
+        print("OnRequestedRemoveWatchlist DONE");
       },
     );
   }
