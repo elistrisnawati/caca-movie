@@ -1,7 +1,7 @@
 part of 'movie_top_rated_bloc.dart';
 
 @immutable
-abstract class TopRatedMoviesEvent extends MovieListEvent {
+abstract class TopRatedMoviesEvent extends Equatable {
   const TopRatedMoviesEvent();
 
   @override

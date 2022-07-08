@@ -4,15 +4,18 @@ import 'package:meta/meta.dart';
 import 'package:module_movie/domain/entities/movie/movie.dart';
 import 'package:module_movie/domain/usecases/movie/get_now_playing_movies.dart';
 
-part 'movie_now_playing_event.dart';
-part 'movie_now_playing_state.dart';
+part 'movie_list_now_playing_event.dart';
+part 'movie_list_now_playing_state.dart';
 
-class NowPlayingMoviesBloc extends Bloc<NowPlayingMoviesEvent, NowPlayingMoviesState> {
+class MovieListNowPlayingBloc extends Bloc<MovieListNowPlayingEvent, NowPlayingMoviesState> {
   final GetNowPlayingMovies _getNowPlayingMovies;
 
-  NowPlayingMoviesBloc(this._getNowPlayingMovies) : super(NowPlayingMoviesEmpty()) {
-    on<OnRequested>(
+  MovieListNowPlayingBloc(this._getNowPlayingMovies)
+      : super(NowPlayingMoviesEmpty()) {
+    on<OnRequestedNowPlayingMovies>(
       (event, emit) async {
+        print("_fetchNowPlayingMovies");
+
         emit(NowPlayingMoviesLoading());
         final result = await _getNowPlayingMovies.execute();
 
@@ -24,6 +27,8 @@ class NowPlayingMoviesBloc extends Bloc<NowPlayingMoviesEvent, NowPlayingMoviesS
             emit(NowPlayingMoviesHasData(data));
           },
         );
+
+        print("_fetchNowPlayingMovies DONE");
       },
     );
   }

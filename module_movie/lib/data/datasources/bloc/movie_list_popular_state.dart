@@ -1,4 +1,4 @@
-part of 'movie_popular_bloc.dart';
+part of 'movie_list_popular_bloc.dart';
 
 @immutable
 abstract class PopularMoviesState extends Equatable {

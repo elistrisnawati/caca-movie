@@ -1,7 +1,7 @@
 part of 'movie_now_playing_bloc.dart';
 
 @immutable
-abstract class NowPlayingMoviesEvent extends MovieListEvent {
+abstract class NowPlayingMoviesEvent extends Equatable {
   const NowPlayingMoviesEvent();
 
   @override

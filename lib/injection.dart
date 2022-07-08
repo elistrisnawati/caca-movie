@@ -1,8 +1,13 @@
+import 'dart:io';
+
 import 'package:get_it/get_it.dart';
 import 'package:http/io_client.dart';
-import 'dart:io';
-import 'package:module_movie/data/datasources/bloc/movie_list_bloc.dart';
+import 'package:module_movie/data/datasources/bloc/movie_detail_bloc.dart';
+import 'package:module_movie/data/datasources/bloc/movie_list_now_playing_bloc.dart';
+import 'package:module_movie/data/datasources/bloc/movie_list_popular_bloc.dart';
+import 'package:module_movie/data/datasources/bloc/movie_list_top_rated_bloc.dart';
 import 'package:module_movie/data/datasources/bloc/movie_now_playing_bloc.dart';
+import 'package:module_movie/data/datasources/bloc/movie_popular_bloc.dart';
 import 'package:module_movie/data/datasources/bloc/movie_search_bloc.dart';
 import 'package:module_movie/data/datasources/bloc/movie_top_rated_bloc.dart';
 import 'package:module_movie/data/datasources/bloc/movie_watchlist_bloc.dart';
@@ -48,7 +53,8 @@ final locator = GetIt.instance;
 
 void init(SecurityContext securityContext) {
   locator.registerLazySingleton(
-    () => IOClient(HttpClient(context: securityContext)),
+    // () => IOClient(HttpClient(context: securityContext)),
+    () => IOClient(HttpClient()),
   );
 
   locator.registerSingletonAsync<SharedPreferences>(
@@ -204,14 +210,22 @@ void init(SecurityContext securityContext) {
 
   // bloc
   locator.registerFactory(
-    () => MovieSearchBloc(
+    () => MovieListPopularBloc(
       locator(),
     ),
   );
   locator.registerFactory(
-    () => MovieListBloc(
+    () => MovieListNowPlayingBloc(
       locator(),
+    ),
+  );
+  locator.registerFactory(
+    () => MovieListTopRatedBloc(
       locator(),
+    ),
+  );
+  locator.registerFactory(
+    () => MovieSearchBloc(
       locator(),
     ),
   );
@@ -226,7 +240,19 @@ void init(SecurityContext securityContext) {
     ),
   );
   locator.registerFactory(
-    () => WatchlistMoviesBloc(
+    () => PopularMoviesBloc(
+      locator(),
+    ),
+  );
+  locator.registerFactory(() => WatchlistMoviesBloc(
+        locator(),
+      ));
+  locator.registerFactory(
+    () => MovieDetailBloc(
+      locator(),
+      locator(),
+      locator(),
+      locator(),
       locator(),
     ),
   );

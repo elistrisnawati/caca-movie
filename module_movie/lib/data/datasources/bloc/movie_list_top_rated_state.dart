@@ -1,4 +1,4 @@
-part of 'movie_top_rated_bloc.dart';
+part of 'movie_list_top_rated_bloc.dart';
 
 @immutable
 abstract class TopRatedMoviesState extends Equatable {

@@ -4,15 +4,18 @@ import 'package:meta/meta.dart';
 import 'package:module_movie/domain/entities/movie/movie.dart';
 import 'package:module_movie/domain/usecases/movie/get_popular_movies.dart';
 
-part 'movie_popular_event.dart';
-part 'movie_popular_state.dart';
+part 'movie_list_popular_event.dart';
+part 'movie_list_popular_state.dart';
 
-class PopularMoviesBloc extends Bloc<PopularMoviesEvent, PopularMoviesState> {
+class MovieListPopularBloc extends Bloc<MovieListPopularEvent, PopularMoviesState> {
   final GetPopularMovies _getPopularMovies;
 
-  PopularMoviesBloc(this._getPopularMovies) : super(PopularMoviesEmpty()) {
-    on<OnRequested>(
+  MovieListPopularBloc(this._getPopularMovies)
+      : super(PopularMoviesEmpty()) {
+    on<OnRequestedPopularMovies>(
       (event, emit) async {
+        print("_fetchPopularMovies");
+
         emit(PopularMoviesLoading());
         final result = await _getPopularMovies.execute();
 
@@ -24,6 +27,8 @@ class PopularMoviesBloc extends Bloc<PopularMoviesEvent, PopularMoviesState> {
             emit(PopularMoviesHasData(data));
           },
         );
+
+        print("_fetchPopularMovies DONE");
       },
     );
   }

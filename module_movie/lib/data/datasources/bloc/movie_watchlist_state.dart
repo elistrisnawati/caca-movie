@@ -1,7 +1,7 @@
 part of 'movie_watchlist_bloc.dart';
 
 @immutable
-abstract class WatchlistMoviesState extends MovieListState {
+abstract class WatchlistMoviesState extends Equatable {
   const WatchlistMoviesState();
 
   @override

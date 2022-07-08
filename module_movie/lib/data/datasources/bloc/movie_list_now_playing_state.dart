@@ -1,4 +1,4 @@
-part of 'movie_now_playing_bloc.dart';
+part of 'movie_list_now_playing_bloc.dart';
 
 @immutable
 abstract class NowPlayingMoviesState extends Equatable {

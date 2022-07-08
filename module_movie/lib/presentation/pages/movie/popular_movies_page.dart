@@ -71,25 +71,19 @@ class _PopularMoviesPageState extends State<PopularMoviesPage> {
               );
             } else if (state is PopularMoviesHasData) {
               final result = state.result;
-              return Expanded(
-                child: ListView.builder(
+              return  ListView.builder(
                   itemBuilder: (context, index) {
                     final movie = result[index];
                     return MovieCard(movie);
                   },
                   itemCount: result.length,
-                ),
               );
             } else if (state is PopularMoviesError) {
-              return Expanded(
-                child: Center(
-                  child: Text(state.message),
-                ),
+              return Center(
+                child: Text(state.message),
               );
             } else {
-              return Expanded(
-                child: Container(),
-              );
+              return Container();
             }
           },
         ),

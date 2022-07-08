@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:ditonton/injection.dart' as di;
-import 'package:ditonton/presentation/pages/home.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +9,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:module_generic/common/constants.dart';
 import 'package:module_generic/common/utils.dart';
 import 'package:module_generic/presentation/pages/about_page.dart';
-import 'package:module_movie/data/datasources/bloc/movie_list_bloc.dart';
+import 'package:module_movie/data/datasources/bloc/movie_detail_bloc.dart';
+import 'package:module_movie/data/datasources/bloc/movie_list_now_playing_bloc.dart';
+import 'package:module_movie/data/datasources/bloc/movie_list_popular_bloc.dart';
+import 'package:module_movie/data/datasources/bloc/movie_list_top_rated_bloc.dart';
 import 'package:module_movie/data/datasources/bloc/movie_popular_bloc.dart';
 import 'package:module_movie/data/datasources/bloc/movie_search_bloc.dart';
 import 'package:module_movie/data/datasources/bloc/movie_top_rated_bloc.dart';
@@ -80,7 +82,13 @@ class MyApp extends StatelessWidget {
           create: (_) => di.locator<MovieSearchBloc>(),
         ),
         BlocProvider(
-          create: (_) => di.locator<MovieListBloc>(),
+          create: (_) => di.locator<MovieListNowPlayingBloc>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<MovieListTopRatedBloc>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<MovieListPopularBloc>(),
         ),
         BlocProvider(
           create: (_) => di.locator<PopularMoviesBloc>(),
@@ -90,6 +98,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (_) => di.locator<WatchlistMoviesBloc>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<MovieDetailBloc>(),
         ),
 
         // for tv series
@@ -120,8 +131,8 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: kRichBlack,
           textTheme: kTextTheme,
         ),
-        // home: HomeMoviePage(),
-        home: HomePage(),
+        home: HomeMoviePage(),
+        // home: HomePage(),
         navigatorObservers: [routeObserver],
         onGenerateRoute: (RouteSettings settings) {
           switch (settings.name) {

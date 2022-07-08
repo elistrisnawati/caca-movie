@@ -36,13 +36,10 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
     // BLOC
     Future.microtask(
       () {
-        context.read<MovieDetailBloc>().add(OnRequested(widget.id));
-        context
-            .read<MovieDetailBloc>()
-            .add(OnRequestedMovieRecommendation(widget.id));
-        context
-            .read<MovieDetailBloc>()
-            .add(OnRequestedWatchlistStatus(widget.id));
+        context.read<MovieDetailBloc>()
+          ..add(OnRequested(widget.id))
+          ..add(OnRequestedMovieRecommendation(widget.id))
+          ..add(OnRequestedWatchlistStatus(widget.id));
       },
     );
   }
@@ -340,7 +337,8 @@ class DetailContent extends StatelessWidget {
                                               );
                                             },
                                             child: ClipRRect(
-                                              borderRadius: const BorderRadius.all(
+                                              borderRadius:
+                                                  const BorderRadius.all(
                                                 Radius.circular(8),
                                               ),
                                               child: CachedNetworkImage(

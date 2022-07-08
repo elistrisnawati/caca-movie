@@ -2,12 +2,12 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:module_generic/common/constants.dart';
-import 'package:module_movie/data/datasources/bloc/movie_list_bloc.dart';
-import 'package:module_movie/data/datasources/bloc/movie_now_playing_bloc.dart';
-import 'package:module_movie/data/datasources/bloc/movie_popular_bloc.dart';
-import 'package:module_movie/data/datasources/bloc/movie_top_rated_bloc.dart';
+import 'package:module_movie/data/datasources/bloc/movie_list_now_playing_bloc.dart';
+import 'package:module_movie/data/datasources/bloc/movie_list_popular_bloc.dart';
+import 'package:module_movie/data/datasources/bloc/movie_list_top_rated_bloc.dart';
 import 'package:module_movie/domain/entities/movie/movie.dart';
 import 'package:module_movie/presentation/pages/movie/movie_detail_page.dart';
+import 'package:module_movie/presentation/pages/movie/popular_movies_page.dart';
 import 'package:module_movie/presentation/pages/movie/search_movie_page.dart';
 import 'package:module_movie/presentation/pages/movie/top_rated_movies_page.dart';
 
@@ -32,10 +32,17 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
       //   ..fetchTopRatedMovies(),
 
       // BLOC
-      () => context.read<MovieListBloc>()
-        ..add(const OnRequestedNowPlayingMovies())
-        ..add(const OnRequestedPopularMovies())
-        ..add(const OnRequestedTopRatedMovies()),
+      () {
+        context.read<MovieListPopularBloc>().add(
+              const OnRequestedPopularMovies(),
+            );
+        context.read<MovieListTopRatedBloc>().add(
+              const OnRequestedTopRatedMovies(),
+            );
+        context.read<MovieListNowPlayingBloc>().add(
+              const OnRequestedNowPlayingMovies(),
+            );
+      },
     );
   }
 
@@ -80,7 +87,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
               // ),
 
               // BLOC
-              BlocBuilder<MovieListBloc, MovieListState>(
+              BlocBuilder<MovieListNowPlayingBloc, NowPlayingMoviesState>(
                 builder: (context, state) {
                   if (state is NowPlayingMoviesLoading) {
                     return const Center(
@@ -102,10 +109,12 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
                   }
                 },
               ),
+
+              // Populare Heading
               _buildSubHeading(
                 title: 'Popular',
                 onTap: () =>
-                    Navigator.pushNamed(context, HomeMoviePage.routeName),
+                    Navigator.pushNamed(context, PopularMoviesPage.routeName),
               ),
 
               // Consumer
@@ -125,7 +134,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
               // ),
 
               // BLOC
-              BlocBuilder<MovieListBloc, MovieListState>(
+              BlocBuilder<MovieListPopularBloc, PopularMoviesState>(
                 builder: (context, state) {
                   if (state is PopularMoviesLoading) {
                     return const Center(
@@ -148,6 +157,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
                 },
               ),
 
+              // Top Rated Heading
               _buildSubHeading(
                 title: 'Top Rated',
                 onTap: () =>
@@ -171,7 +181,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
               // ),
 
               // BLOC
-              BlocBuilder<MovieListBloc, MovieListState>(
+              BlocBuilder<MovieListTopRatedBloc, TopRatedMoviesState>(
                 builder: (context, state) {
                   if (state is TopRatedMoviesLoading) {
                     return const Center(
