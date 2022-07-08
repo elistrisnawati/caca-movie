@@ -9,14 +9,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:module_generic/common/constants.dart';
 import 'package:module_generic/common/utils.dart';
 import 'package:module_generic/presentation/pages/about_page.dart';
-import 'package:module_movie/data/datasources/bloc/movie_detail_bloc.dart';
-import 'package:module_movie/data/datasources/bloc/movie_list_now_playing_bloc.dart';
-import 'package:module_movie/data/datasources/bloc/movie_list_popular_bloc.dart';
-import 'package:module_movie/data/datasources/bloc/movie_list_top_rated_bloc.dart';
-import 'package:module_movie/data/datasources/bloc/movie_popular_bloc.dart';
-import 'package:module_movie/data/datasources/bloc/movie_search_bloc.dart';
-import 'package:module_movie/data/datasources/bloc/movie_top_rated_bloc.dart';
-import 'package:module_movie/data/datasources/bloc/movie_watchlist_bloc.dart';
+import 'package:module_movie/data/datasources/bloc/movie_detail/movie_detail_bloc.dart';
+import 'package:module_movie/data/datasources/bloc/movie_detail/recommendation/movie_detail_recommendation_bloc.dart';
+import 'package:module_movie/data/datasources/bloc/movie_detail/watchlist/movie_detail_watchlist_bloc.dart';
+import 'package:module_movie/data/datasources/bloc/movie_list/now_playing/movie_list_now_playing_bloc.dart';
+import 'package:module_movie/data/datasources/bloc/movie_list/popular/movie_list_popular_bloc.dart';
+import 'package:module_movie/data/datasources/bloc/movie_list/top_rated/movie_list_top_rated_bloc.dart';
+import 'package:module_movie/data/datasources/bloc/popular/movie_popular_bloc.dart';
+import 'package:module_movie/data/datasources/bloc/search/movie_search_bloc.dart';
+import 'package:module_movie/data/datasources/bloc/top_rated/movie_top_rated_bloc.dart';
+import 'package:module_movie/data/datasources/bloc/watchlist/movie_watchlist_bloc.dart';
 import 'package:module_movie/presentation/pages/movie/home_movie_page.dart';
 import 'package:module_movie/presentation/pages/movie/movie_detail_page.dart';
 import 'package:module_movie/presentation/pages/movie/popular_movies_page.dart';
@@ -101,6 +103,12 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (_) => di.locator<MovieDetailBloc>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<MovieDetailRecommendationBloc>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<MovieDetailWatchlistBloc>(),
         ),
 
         // for tv series

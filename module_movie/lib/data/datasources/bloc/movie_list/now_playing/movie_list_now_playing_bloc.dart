@@ -7,7 +7,8 @@ import 'package:module_movie/domain/usecases/movie/get_now_playing_movies.dart';
 part 'movie_list_now_playing_event.dart';
 part 'movie_list_now_playing_state.dart';
 
-class MovieListNowPlayingBloc extends Bloc<MovieListNowPlayingEvent, NowPlayingMoviesState> {
+class MovieListNowPlayingBloc
+    extends Bloc<MovieListNowPlayingEvent, NowPlayingMoviesState> {
   final GetNowPlayingMovies _getNowPlayingMovies;
 
   MovieListNowPlayingBloc(this._getNowPlayingMovies)

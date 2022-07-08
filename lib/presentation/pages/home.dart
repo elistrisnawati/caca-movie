@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:module_generic/common/constants.dart';
 import 'package:module_generic/common/state_enum.dart';
 import 'package:module_generic/presentation/pages/about_page.dart';
-import 'package:module_movie/data/datasources/bloc/movie_list_popular_bloc.dart';
+import 'package:module_movie/data/datasources/bloc/movie_list/popular/movie_list_popular_bloc.dart';
 import 'package:module_movie/domain/entities/movie/movie.dart';
 import 'package:module_movie/presentation/pages/movie/home_movie_page.dart';
 import 'package:module_movie/presentation/pages/movie/movie_detail_page.dart';
@@ -41,7 +41,9 @@ class _HomePageState extends State<HomePage> {
 
     // BLOC
     Future.microtask(
-      () => context.read<MovieListPopularBloc>().add(const OnRequestedPopularMovies()),
+      () => context
+          .read<MovieListPopularBloc>()
+          .add(const OnRequestedPopularMovies()),
     );
   }
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:module_movie/data/datasources/bloc/movie_top_rated_bloc.dart';
+import 'package:module_movie/data/datasources/bloc/top_rated/movie_top_rated_bloc.dart';
 import 'package:module_movie/presentation/widgets/movie/movie_card_list.dart';
 
 class TopRatedMoviesPage extends StatefulWidget {

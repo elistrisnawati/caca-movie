@@ -4,7 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:module_generic/common/failure.dart';
-import 'package:module_movie/data/datasources/bloc/movie_search_bloc.dart';
+import 'package:module_movie/data/datasources/bloc/search/movie_search_bloc.dart';
 import 'package:module_movie/domain/entities/movie/movie.dart';
 import 'package:module_movie/domain/usecases/movie/search_movies.dart';
 

@@ -23,11 +23,9 @@ class MovieDetailError extends MovieDetailState {
 
 class MovieDetailHasData extends MovieDetailState {
   late MovieDetail movie;
-  late bool isAddedToWatchlist = false;
-  late List<Movie> movieRecommendations = [];
 
   MovieDetailHasData();
 
   @override
-  List<Object> get props => [movie, isAddedToWatchlist, movieRecommendations];
+  List<Object> get props => [movie];
 }

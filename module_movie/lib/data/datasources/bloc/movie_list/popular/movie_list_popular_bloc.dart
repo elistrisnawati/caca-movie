@@ -7,11 +7,11 @@ import 'package:module_movie/domain/usecases/movie/get_popular_movies.dart';
 part 'movie_list_popular_event.dart';
 part 'movie_list_popular_state.dart';
 
-class MovieListPopularBloc extends Bloc<MovieListPopularEvent, PopularMoviesState> {
+class MovieListPopularBloc
+    extends Bloc<MovieListPopularEvent, PopularMoviesState> {
   final GetPopularMovies _getPopularMovies;
 
-  MovieListPopularBloc(this._getPopularMovies)
-      : super(PopularMoviesEmpty()) {
+  MovieListPopularBloc(this._getPopularMovies) : super(PopularMoviesEmpty()) {
     on<OnRequestedPopularMovies>(
       (event, emit) async {
         print("_fetchPopularMovies");

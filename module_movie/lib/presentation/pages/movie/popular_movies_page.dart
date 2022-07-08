@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:module_movie/data/datasources/bloc/movie_popular_bloc.dart';
+import 'package:module_movie/data/datasources/bloc/popular/movie_popular_bloc.dart';
 import 'package:module_movie/presentation/widgets/movie/movie_card_list.dart';
 
 class PopularMoviesPage extends StatefulWidget {
@@ -71,12 +71,12 @@ class _PopularMoviesPageState extends State<PopularMoviesPage> {
               );
             } else if (state is PopularMoviesHasData) {
               final result = state.result;
-              return  ListView.builder(
-                  itemBuilder: (context, index) {
-                    final movie = result[index];
-                    return MovieCard(movie);
-                  },
-                  itemCount: result.length,
+              return ListView.builder(
+                itemBuilder: (context, index) {
+                  final movie = result[index];
+                  return MovieCard(movie);
+                },
+                itemCount: result.length,
               );
             } else if (state is PopularMoviesError) {
               return Center(

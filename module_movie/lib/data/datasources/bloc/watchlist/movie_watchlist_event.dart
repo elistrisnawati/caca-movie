@@ -9,7 +9,6 @@ abstract class WatchlistMoviesEvent extends Equatable {
 }
 
 class OnRequested extends WatchlistMoviesEvent {
-
   const OnRequested();
 
   @override

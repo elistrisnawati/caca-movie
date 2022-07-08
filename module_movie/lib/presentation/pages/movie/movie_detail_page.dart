@@ -4,7 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:module_generic/common/constants.dart';
 import 'package:module_generic/domain/entities/genre.dart';
-import 'package:module_movie/data/datasources/bloc/movie_detail_bloc.dart';
+import 'package:module_movie/data/datasources/bloc/movie_detail/movie_detail_bloc.dart';
+import 'package:module_movie/data/datasources/bloc/movie_detail/recommendation/movie_detail_recommendation_bloc.dart';
+import 'package:module_movie/data/datasources/bloc/movie_detail/watchlist/movie_detail_watchlist_bloc.dart';
 import 'package:module_movie/domain/entities/movie/movie.dart';
 import 'package:module_movie/domain/entities/movie/movie_detail.dart';
 
@@ -36,10 +38,12 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
     // BLOC
     Future.microtask(
       () {
-        context.read<MovieDetailBloc>()
-          ..add(OnRequested(widget.id))
-          ..add(OnRequestedMovieRecommendation(widget.id))
-          ..add(OnRequestedWatchlistStatus(widget.id));
+        context.read<MovieDetailBloc>().add(
+              OnRequestedMovieDetail(widget.id),
+            );
+        context.read<MovieDetailRecommendationBloc>().add(
+              OnRequestedMovieRecommendation(widget.id),
+            );
       },
     );
   }
@@ -82,8 +86,6 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
             return SafeArea(
               child: DetailContent(
                 state.movie,
-                state.movieRecommendations,
-                state.isAddedToWatchlist,
               ),
             );
           } else if (state is MovieDetailError) {
@@ -105,15 +107,23 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
 
 class DetailContent extends StatelessWidget {
   final MovieDetail movie;
-  final List<Movie> recommendations;
-  final bool isAddedWatchlist;
+  bool isAddedWatchlist = false;
 
-  const DetailContent(this.movie, this.recommendations, this.isAddedWatchlist,
-      {Key? key})
-      : super(key: key);
+  DetailContent(this.movie, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    context.read<MovieDetailWatchlistBloc>()
+      ..add(
+        OnRequestedWatchlistStatus(movie.id),
+      )
+      ..add(
+        OnRequestedRemoveWatchlist(movie),
+      )
+      ..add(
+        OnRequestedSaveWatchlist(movie),
+      );
+
     final screenWidth = MediaQuery.of(context).size.width;
     return Stack(
       children: [
@@ -163,7 +173,7 @@ class DetailContent extends StatelessWidget {
 
                                   // BLOC
                                   context
-                                      .read<MovieDetailBloc>()
+                                      .read<MovieDetailWatchlistBloc>()
                                       .add(OnRequestedSaveWatchlist(movie));
                                 } else {
                                   // Provider
@@ -174,7 +184,7 @@ class DetailContent extends StatelessWidget {
 
                                   // BLOC
                                   context
-                                      .read<MovieDetailBloc>()
+                                      .read<MovieDetailWatchlistBloc>()
                                       .add(OnRequestedRemoveWatchlist(movie));
                                 }
 
@@ -190,10 +200,10 @@ class DetailContent extends StatelessWidget {
                                     .watchlistMessage;
 
                                 if (message ==
-                                        MovieDetailBloc
+                                        MovieDetailWatchlistBloc
                                             .watchlistAddSuccessMessage ||
                                     message ==
-                                        MovieDetailBloc
+                                        MovieDetailWatchlistBloc
                                             .watchlistRemoveSuccessMessage) {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
@@ -313,13 +323,18 @@ class DetailContent extends StatelessWidget {
                             //   },
                             // ),
 
-                            BlocBuilder<MovieDetailBloc, MovieDetailState>(
+                            BlocBuilder<MovieDetailRecommendationBloc,
+                                MovieDetailRecommendationState>(
                               builder: (context, state) {
-                                if (state is MovieDetailLoading) {
+                                print(state);
+                                if (state is MovieDetailRecommendationLoading) {
                                   return const Center(
                                     child: CircularProgressIndicator(),
                                   );
-                                } else if (state is MovieDetailHasData) {
+                                } else if (state
+                                    is MovieDetailRecommendationHasData) {
+                                  List<Movie> recommendations =
+                                      state.movieRecommendations;
                                   return SizedBox(
                                     height: 150,
                                     child: ListView.builder(
@@ -360,16 +375,13 @@ class DetailContent extends StatelessWidget {
                                       itemCount: recommendations.length,
                                     ),
                                   );
-                                } else if (state is MovieDetailError) {
-                                  return Expanded(
-                                    child: Center(
-                                      child: Text(state.message),
-                                    ),
+                                } else if (state
+                                    is MovieDetailRecommendationError) {
+                                  return Center(
+                                    child: Text(state.message),
                                   );
                                 } else {
-                                  return Expanded(
-                                    child: Container(),
-                                  );
+                                  return Container();
                                 }
                               },
                             ),

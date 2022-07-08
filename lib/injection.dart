@@ -2,15 +2,17 @@ import 'dart:io';
 
 import 'package:get_it/get_it.dart';
 import 'package:http/io_client.dart';
-import 'package:module_movie/data/datasources/bloc/movie_detail_bloc.dart';
-import 'package:module_movie/data/datasources/bloc/movie_list_now_playing_bloc.dart';
-import 'package:module_movie/data/datasources/bloc/movie_list_popular_bloc.dart';
-import 'package:module_movie/data/datasources/bloc/movie_list_top_rated_bloc.dart';
-import 'package:module_movie/data/datasources/bloc/movie_now_playing_bloc.dart';
-import 'package:module_movie/data/datasources/bloc/movie_popular_bloc.dart';
-import 'package:module_movie/data/datasources/bloc/movie_search_bloc.dart';
-import 'package:module_movie/data/datasources/bloc/movie_top_rated_bloc.dart';
-import 'package:module_movie/data/datasources/bloc/movie_watchlist_bloc.dart';
+import 'package:module_movie/data/datasources/bloc/movie_detail/movie_detail_bloc.dart';
+import 'package:module_movie/data/datasources/bloc/movie_detail/recommendation/movie_detail_recommendation_bloc.dart';
+import 'package:module_movie/data/datasources/bloc/movie_detail/watchlist/movie_detail_watchlist_bloc.dart';
+import 'package:module_movie/data/datasources/bloc/movie_list/now_playing/movie_list_now_playing_bloc.dart';
+import 'package:module_movie/data/datasources/bloc/movie_list/popular/movie_list_popular_bloc.dart';
+import 'package:module_movie/data/datasources/bloc/movie_list/top_rated/movie_list_top_rated_bloc.dart';
+import 'package:module_movie/data/datasources/bloc/now_playing/movie_now_playing_bloc.dart';
+import 'package:module_movie/data/datasources/bloc/popular/movie_popular_bloc.dart';
+import 'package:module_movie/data/datasources/bloc/search/movie_search_bloc.dart';
+import 'package:module_movie/data/datasources/bloc/top_rated/movie_top_rated_bloc.dart';
+import 'package:module_movie/data/datasources/bloc/watchlist/movie_watchlist_bloc.dart';
 import 'package:module_movie/data/datasources/db/database_helper_movie.dart';
 import 'package:module_movie/data/datasources/movie/movie_local_data_source.dart';
 import 'package:module_movie/data/datasources/movie/movie_remote_data_source.dart';
@@ -250,7 +252,15 @@ void init(SecurityContext securityContext) {
   locator.registerFactory(
     () => MovieDetailBloc(
       locator(),
+    ),
+  );
+  locator.registerFactory(
+    () => MovieDetailRecommendationBloc(
       locator(),
+    ),
+  );
+  locator.registerFactory(
+    () => MovieDetailWatchlistBloc(
       locator(),
       locator(),
       locator(),

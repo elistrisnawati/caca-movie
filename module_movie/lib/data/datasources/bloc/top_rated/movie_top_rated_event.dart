@@ -9,7 +9,6 @@ abstract class TopRatedMoviesEvent extends Equatable {
 }
 
 class OnRequested extends TopRatedMoviesEvent {
-
   const OnRequested();
 
   @override
