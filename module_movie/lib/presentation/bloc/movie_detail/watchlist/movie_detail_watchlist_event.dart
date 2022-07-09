@@ -1,4 +1,4 @@
-part of 'movie_detail_watchlist_bloc.dart';
+part of 'movie_detail_watchlist_cubit.dart';
 
 @immutable
 abstract class MovieDetailWatchlistEvent extends Equatable {

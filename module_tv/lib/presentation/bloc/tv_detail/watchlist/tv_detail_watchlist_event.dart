@@ -1,4 +1,4 @@
-part of 'tv_detail_watchlist_bloc.dart';
+part of 'tv_detail_watchlist_cubit.dart';
 
 @immutable
 abstract class TvDetailWatchlistEvent extends Equatable {

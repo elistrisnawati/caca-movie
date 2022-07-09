@@ -19,7 +19,7 @@ import 'package:module_movie/domain/usecases/movie/save_movie_watchlist.dart';
 import 'package:module_movie/domain/usecases/movie/search_movies.dart';
 import 'package:module_movie/presentation/bloc/movie_detail/movie_detail_bloc.dart';
 import 'package:module_movie/presentation/bloc/movie_detail/recommendation/movie_detail_recommendation_bloc.dart';
-import 'package:module_movie/presentation/bloc/movie_detail/watchlist/movie_detail_watchlist_bloc.dart';
+import 'package:module_movie/presentation/bloc/movie_detail/watchlist/movie_detail_watchlist_cubit.dart';
 import 'package:module_movie/presentation/bloc/movie_list/now_playing/movie_list_now_playing_bloc.dart';
 import 'package:module_movie/presentation/bloc/movie_list/popular/movie_list_popular_bloc.dart';
 import 'package:module_movie/presentation/bloc/movie_list/top_rated/movie_list_top_rated_bloc.dart';
@@ -49,7 +49,7 @@ import 'package:module_tv/presentation/bloc/search/tv_search_bloc.dart';
 import 'package:module_tv/presentation/bloc/top_rated/tv_top_rated_bloc.dart';
 import 'package:module_tv/presentation/bloc/tv_detail/recommendation/tv_detail_recommendation_bloc.dart';
 import 'package:module_tv/presentation/bloc/tv_detail/tv_detail_bloc.dart';
-import 'package:module_tv/presentation/bloc/tv_detail/watchlist/tv_detail_watchlist_bloc.dart';
+import 'package:module_tv/presentation/bloc/tv_detail/watchlist/tv_detail_watchlist_cubit.dart';
 import 'package:module_tv/presentation/bloc/tv_list/now_playing/tv_list_now_playing_bloc.dart';
 import 'package:module_tv/presentation/bloc/tv_list/popular/tv_list_popular_bloc.dart';
 import 'package:module_tv/presentation/bloc/tv_list/top_rated/tv_list_top_rated_bloc.dart';
@@ -265,7 +265,7 @@ void init(SecurityContext securityContext) {
     ),
   );
   locator.registerFactory(
-    () => MovieDetailWatchlistBloc(
+    () => MovieDetailWatchlistCubit(
       locator(),
       locator(),
       locator(),
@@ -322,7 +322,7 @@ void init(SecurityContext securityContext) {
     ),
   );
   locator.registerFactory(
-    () => TvDetailWatchlistBloc(
+    () => TvDetailWatchlistCubit(
       locator(),
       locator(),
       locator(),
