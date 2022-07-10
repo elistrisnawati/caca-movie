@@ -11,5 +11,5 @@ Generate the mocks by running the following command:
 
 ## CodeMagic
 
-[![Codemagic build status](https://api.codemagic.io/apps/62c5ba64e835a06a99eaa890/default-workflow/status_badge.svg)](https://codemagic.io/apps/62c5ba64e835a06a99eaa890/default-workflow/latest_build)
+[![Codemagic build status](https://api.codemagic.io/apps/62c5ba64e835a06a99eaa890/62c5ba64e835a06a99eaa88f/status_badge.svg)](https://codemagic.io/apps/62c5ba64e835a06a99eaa890/62c5ba64e835a06a99eaa88f/latest_build)
 
