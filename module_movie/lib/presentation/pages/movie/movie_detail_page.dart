@@ -324,7 +324,6 @@ class DetailContent extends StatelessWidget {
                             BlocBuilder<MovieDetailRecommendationBloc,
                                 MovieDetailRecommendationState>(
                               builder: (context, state) {
-                                print(state);
                                 if (state is MovieDetailRecommendationLoading) {
                                   return const Center(
                                     child: CircularProgressIndicator(),

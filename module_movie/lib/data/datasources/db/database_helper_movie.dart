@@ -32,6 +32,7 @@ class DatabaseHelperMovie {
   }
 
   void _onOpen(Database db) async {
+    print("OPEN DB $_tblMovieWatchlist");
     await db.execute('''
       CREATE TABLE IF NOT EXISTS $_tblMovieWatchlist (
         id INTEGER PRIMARY KEY,

@@ -31,6 +31,7 @@ class DatabaseHelperTv {
   }
 
   void _onOpen(Database db) async {
+    print("OPEN DB $_tblTvWatchlist");
     await db.execute('''
       CREATE TABLE IF NOT EXISTS $_tblTvWatchlist (
         id INTEGER PRIMARY KEY,

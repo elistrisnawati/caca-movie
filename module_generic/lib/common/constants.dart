@@ -5,7 +5,7 @@ const String BASE_IMAGE_URL = 'https://image.tmdb.org/t/p/w500';
 const String BLANK_POSTER = 'assets/blank/blank-poster.jpg';
 const String BLANK_BACKDROP = 'assets/blank/blank-backdrop.jpg';
 
-const String DATABASE = 'ditonton.db';
+const String DATABASE = 'ditonton.2.db';
 
 // colors
 const Color kRichBlack = Color(0xFF000814);
