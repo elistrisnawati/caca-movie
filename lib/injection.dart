@@ -213,7 +213,9 @@ void init(SecurityContext securityContext) {
       () => TvLocalDataSourceImpl(databaseHelper: locator()));
 
   // helper
-  locator.registerLazySingleton<DatabaseHelperTv>(() => DatabaseHelperTv());
+  locator.registerLazySingleton<DatabaseHelperTv>(
+    () => DatabaseHelperTv(),
+  );
 
   // bloc
   locator.registerFactory(

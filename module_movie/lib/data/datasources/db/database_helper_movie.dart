@@ -27,7 +27,9 @@ class DatabaseHelperMovie {
     final path = await getDatabasesPath();
     final databasePath = '$path/$DATABASE';
 
-    var db = await openDatabase(databasePath, version: 1, onOpen: _onOpen);
+    var db = await openDatabase(databasePath, version: 1);
+    _onOpen(db);
+
     return db;
   }
 
