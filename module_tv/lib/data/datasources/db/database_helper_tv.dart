@@ -34,7 +34,7 @@ class DatabaseHelperTv {
     await db.execute('''
       CREATE TABLE IF NOT EXISTS $_tblTvWatchlist (
         id INTEGER PRIMARY KEY,
-        title TEXT,
+        name TEXT,
         overview TEXT,
         posterPath TEXT
       );
